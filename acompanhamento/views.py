@@ -3,10 +3,10 @@ from django.shortcuts import render
 from .models import Acompanhamento
 
 def listagem_acompanhamentos(request):
-    acompanhamento = Acompanhamento.objects.all()
+    acompanhamentos = Acompanhamento.objects.all()
 
     content = {
-        'acompanhamento': acompanhamento
+        'acompanhamentos': acompanhamentos
     }
 
     return render(request, 'acompanhamentos.html', content)

@@ -1,3 +1,12 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Acompanhamento
+
+def listagem_acompanhamentos(request):
+    acompanhamento = Acompanhamento.objects.all()
+
+    content = {
+        'acompanhamento': acompanhamento
+    }
+
+    return render(request, 'acompanhamentos.html', content)

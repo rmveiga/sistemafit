@@ -1,0 +1,35 @@
+{% extends "base_model.html" %}
+
+{% block acompanhamentos %}
+
+<h2>Usuários</h2>
+<!--<a href="evento/"><button type="button">Novo evento</button></a>-->
+<!--<label>Ordenar por:</label>-->
+<!--<select name="ordem">-->
+<!--    <option value="titulo">Título</option>-->
+<!--    <option value="data_evento">Data do Evento</option>-->
+<!--</select>-->
+<!--<a href="/"><button type="button">Aplicar</button></a>-->
+<!--<a href="historico/"><button type="button">Histórico de ventos</button></a>-->
+
+
+<ul style="font-size: 18px">
+{% for usuario in usuarios %}
+    <li>
+        {{ usuario.nome }}
+<!--        <div style={% if evento.get_evento_atrasado %}-->
+<!--                        "color:red"-->
+<!--                    {% endif %}-->
+<!--                    {% if evento.get_evento_quase_atrasado %}-->
+<!--                        "color:blue"-->
+<!--                    {% endif %}>-->
+<!--        {{ evento.titulo }} - {{ evento.get_data_evento }} - {{ evento.local }}-->
+<!--        ( <a href="evento/?id={{ evento.id }}">Editar</a>-->
+<!--        / <a href="evento/delete/{{ evento.id }}/">Excluir</a> )-->
+        </div>
+    </li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -27,10 +27,15 @@ from unidade.views import (
     listagem_unidades
 )
 
+from usuario.views import (
+    listagem_usuarios
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', listagem_acompanhamentos),
     path('acompanhamentos/', listagem_acompanhamentos),
     path('metricas/', listagem_metricas),
     path('unidades/', listagem_unidades),
+    path('usuarios/', listagem_usuarios),
 ]

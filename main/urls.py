@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from acompanhamento import views
+from acompanhamento.views import (
+    listagem_acompanhamentos
+)
+from metrica.views import (
+    listagem_metricas
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.listagem_acompanhamentos),
+    path('', listagem_acompanhamentos),
+    path('acompanhamentos/', listagem_acompanhamentos),
+    path('metricas/', listagem_metricas),
 ]

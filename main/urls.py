@@ -23,9 +23,14 @@ from metrica.views import (
     listagem_metricas
 )
 
+from unidade.views import (
+    listagem_unidades
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', listagem_acompanhamentos),
     path('acompanhamentos/', listagem_acompanhamentos),
     path('metricas/', listagem_metricas),
+    path('unidades/', listagem_unidades),
 ]

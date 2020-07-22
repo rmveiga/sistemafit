@@ -29,7 +29,7 @@ from unidade.views import (
 
 from usuario.views import (
     listagem_usuarios,
-    criar_usuario,
+    submit_usuario,
 )
 
 urlpatterns = [
@@ -39,5 +39,5 @@ urlpatterns = [
     path('metricas/', listagem_metricas),
     path('unidades/', listagem_unidades),
     path('usuarios/', listagem_usuarios),
-    path('usuarios/novo', criar_usuario),
+    path('usuarios/submit/', submit_usuario),
 ]

@@ -12,7 +12,7 @@ def listagem_usuarios(request):
 
     return render(request, 'usuarios.html', content)
 
-def criar_usuario(request):
+def submit_usuario(request):
     if request.method == 'POST':
         form = UsuarioModelForm(request.POST)
         if form.is_valid():

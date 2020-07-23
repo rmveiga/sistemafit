@@ -28,8 +28,8 @@ from unidade.views import (
 )
 
 from usuario.views import (
-    listagem_usuarios,
-    submit_usuario,
+    list_usuarios,
+    create_usuario,
 )
 
 urlpatterns = [
@@ -38,6 +38,6 @@ urlpatterns = [
     path('acompanhamentos/', listagem_acompanhamentos),
     path('metricas/', listagem_metricas),
     path('unidades/', listagem_unidades),
-    path('usuarios/', listagem_usuarios),
-    path('usuarios/submit/', submit_usuario),
+    path('usuarios/', list_usuarios),
+    path('usuarios/submit/', create_usuario),
 ]

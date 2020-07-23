@@ -3,16 +3,16 @@ from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioModelForm
 
-def listagem_usuarios(request):
+def list_usuarios(request):
     usuarios = Usuario.objects.all()
 
     content = {
         'usuarios': usuarios
     }
 
-    return render(request, 'usuarios.html', content)
+    return render(request, 'usuarios/list.html', content)
 
-def submit_usuario(request):
+def create_usuario(request):
     if request.method == 'POST':
         form = UsuarioModelForm(request.POST)
         if form.is_valid():
@@ -25,4 +25,4 @@ def submit_usuario(request):
         'form': form
     }
 
-    return render(request, 'usuario_create.html', context=context)
+    return render(request, 'usuarios/create.html', context=context)

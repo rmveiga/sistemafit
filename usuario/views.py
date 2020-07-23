@@ -17,7 +17,7 @@ def create_usuario(request):
         form = UsuarioModelForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('usuarios:list')
+            return redirect('usuario:list')
     else:
         form = UsuarioModelForm()
 
@@ -43,3 +43,8 @@ def update_usuario(request, usuario_id):
     }
 
     return render(request, 'usuarios/update.html', context=context)
+
+def delete_usuario(request, usuario_id):
+    usuario = Usuario.objects.get(pk=usuario_id)
+    usuario.delete()
+    return redirect('usuario:list')

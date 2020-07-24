@@ -23,15 +23,11 @@ from metrica.views import (
     listagem_metricas
 )
 
-from unidade.views import (
-    listagem_unidades
-)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuarios/', include(('usuario.urls', 'usuario'), namespace='usuario')),
+    path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('', listagem_acompanhamentos),
     path('acompanhamentos/', listagem_acompanhamentos),
     path('metricas/', listagem_metricas),
-    path('unidades/', listagem_unidades),
 ]

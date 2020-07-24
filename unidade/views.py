@@ -22,7 +22,27 @@ def create_unidade(request):
         form = UnidadeModelForm()
 
     context = {
-        'form': form
+        'form': form,
     }
 
     return render(request, 'unidades/create.html', context=context)
+
+def update_unidade(request, unidade_id):
+    unidade = Unidade.objects.get(pk=unidade_id)
+
+    if request.method == 'POST':
+        if request.POST.get('sigla') != unidade.sigla:
+            print('diferente')
+
+        form = UnidadeModelForm(data=request.POST, instance=unidade)
+        if form.is_valid():
+            form.save()
+            return redirect('unidade:list-unidades')
+    else:
+        form = UnidadeModelForm(instance=unidade)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'unidades/update.html', context=context)

@@ -35,14 +35,12 @@ def create_unidade(request):
         valido = True
         if not verifica_se_unidade_ja_existe(request):
             valido = False
-            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
                 f'A unidade {request.POST.get("sigla")} já está cadastrada'
             )
         if not verifica_se_digito_negativo(request):
             valido = False
-            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
                 'A quantidade de dígitos não pode ser negativa'
@@ -58,6 +56,8 @@ def create_unidade(request):
                 )
 
                 return redirect('unidade:list-unidades')
+        else:
+            form = UnidadeModelForm(data=request.POST)
     else:
         form = UnidadeModelForm()
 
@@ -74,14 +74,12 @@ def update_unidade(request, unidade_id):
         valido = True
         if not verifica_se_unidade_ja_existe(request, unidade):
             valido = False
-            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
                 f'A unidade {request.POST.get("sigla")} já está cadastrada'
             )
         if not verifica_se_digito_negativo(request):
             valido = False
-            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
                 'A quantidade de dígitos não pode ser negativa'
@@ -98,6 +96,8 @@ def update_unidade(request, unidade_id):
                 )
 
                 return redirect('unidade:list-unidades')
+        else:
+            form = UnidadeModelForm(data=request.POST)
     else:
         form = UnidadeModelForm(instance=unidade)
 

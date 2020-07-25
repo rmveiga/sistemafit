@@ -4,6 +4,23 @@ from django.contrib import messages
 from .models import Unidade
 from .forms import UnidadeModelForm
 
+def verifica_se_unidade_ja_existe(request, unidade=None):
+    sigla = request.POST.get('sigla')
+    unidades = Unidade.objects.filter(sigla__iexact=sigla)
+
+    if unidade is None:
+        if unidades:
+            return False
+    elif sigla != unidade.sigla and unidades:
+            return False
+    return True
+
+def verifica_se_digito_negativo(request):
+    digito = int(request.POST.get('digitos'))
+    if digito < 0:
+        return False
+    return True
+
 def list_unidades(request):
     unidades = Unidade.objects.all()
 
@@ -15,16 +32,23 @@ def list_unidades(request):
 
 def create_unidade(request):
     if request.method == 'POST':
-        sigla_form = request.POST.get('sigla')
-        unidade_filtro = Unidade.objects.filter(sigla__iexact=sigla_form)
-
-        if unidade_filtro:
+        valido = True
+        if not verifica_se_unidade_ja_existe(request):
+            valido = False
+            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
-                f'A unidade {sigla_form} já está cadastrada'
+                f'A unidade {request.POST.get("sigla")} já está cadastrada'
             )
+        if not verifica_se_digito_negativo(request):
+            valido = False
             form = UnidadeModelForm(data=request.POST)
-        else:
+            messages.add_message(
+                request, messages.WARNING,
+                'A quantidade de dígitos não pode ser negativa'
+            )
+
+        if valido:
             form = UnidadeModelForm(request.POST)
             if form.is_valid():
                 form.save()
@@ -44,20 +68,27 @@ def create_unidade(request):
     return render(request, 'unidades/create.html', context=context)
 
 def update_unidade(request, unidade_id):
-    unidade_db = Unidade.objects.get(pk=unidade_id)
+    unidade = Unidade.objects.get(pk=unidade_id)
 
     if request.method == 'POST':
-        sigla_form = request.POST.get('sigla')
-        unidade_filtro = Unidade.objects.filter(sigla__iexact=sigla_form)
-
-        if sigla_form != unidade_db.sigla and len(unidade_filtro) > 0:
+        valido = True
+        if not verifica_se_unidade_ja_existe(request, unidade):
+            valido = False
+            form = UnidadeModelForm(data=request.POST)
             messages.add_message(
                 request, messages.WARNING,
-                f'A unidade {sigla_form} já está cadastrada'
+                f'A unidade {request.POST.get("sigla")} já está cadastrada'
             )
+        if not verifica_se_digito_negativo(request):
+            valido = False
             form = UnidadeModelForm(data=request.POST)
-        else:
-            form = UnidadeModelForm(data=request.POST, instance=unidade_db)
+            messages.add_message(
+                request, messages.WARNING,
+                'A quantidade de dígitos não pode ser negativa'
+            )
+
+        if valido:
+            form = UnidadeModelForm(data=request.POST, instance=unidade)
 
             if form.is_valid():
                 form.save()
@@ -68,7 +99,7 @@ def update_unidade(request, unidade_id):
 
                 return redirect('unidade:list-unidades')
     else:
-        form = UnidadeModelForm(instance=unidade_db)
+        form = UnidadeModelForm(instance=unidade)
 
     context = {
         'form': form

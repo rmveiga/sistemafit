@@ -46,3 +46,8 @@ def update_unidade(request, unidade_id):
     }
 
     return render(request, 'unidades/update.html', context=context)
+
+def delete_unidade(request, unidade_id):
+    unidade = Unidade.objects.get(pk=unidade_id)
+    unidade.delete()
+    return redirect('unidade:list-unidades')

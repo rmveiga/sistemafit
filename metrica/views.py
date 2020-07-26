@@ -37,3 +37,31 @@ def create_metrica(request):
     }
 
     return render(request, 'metricas/create.html', context=context)
+
+def update_metrica(request, metrica_id):
+    metrica = Metrica.objects.get(pk=metrica_id)
+
+    if request.method == 'POST':
+        valido = True
+
+        if valido:
+            form = MetricaModelForm(data=request.POST, instance=metrica)
+
+            if form.is_valid():
+                form.save()
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    f'Métrica alterada com sucesso'
+                )
+
+                return redirect('metrica:list-metricas')
+        else:
+            form = MetricaModelForm(data=request.POST)
+    else:
+        form = MetricaModelForm(instance=metrica)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'metricas/update.html', context=context)

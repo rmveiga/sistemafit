@@ -9,6 +9,14 @@
     <form method="post">
         {% csrf_token %}
 
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         {% for field in form %}
             <div class="form-group row">
                 <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>

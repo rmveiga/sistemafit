@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Usuario',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=50, validators=[usuario.models.verifica_se_usuario_ja_existe], verbose_name='Nome')),
+                ('nome', models.CharField(max_length=50, verbose_name='Nome')),
             ],
         ),
     ]

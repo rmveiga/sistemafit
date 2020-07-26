@@ -5,6 +5,13 @@
 <h2>Usuários</h2>
 <a href="create"><button type="button">Novo usuário</button></a>
 
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
 
 <ul style="font-size: 18px">
 {% for usuario in usuarios %}

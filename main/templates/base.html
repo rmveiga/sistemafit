@@ -5,22 +5,15 @@
     <title>SistemaFit</title>
 </head>
 <body>
+    <a href="/">Home</a>
     <a href="/acompanhamentos/list">Acompanhamentos</a>
     <a href="/usuarios/list">Usuários</a>
     <a href="/metricas/list">Métricas</a>
     <a href="/unidades/list">Unidades</a>
-    
+
     {% block acompanhamentos %} {% endblock %}
     {% block usuarios %} {% endblock %}
     {% block metricas %} {% endblock %}
     {% block unidades %} {% endblock %}
-
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
 </body>
 </html>

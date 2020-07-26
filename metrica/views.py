@@ -7,11 +7,11 @@ from .forms import MetricaModelForm
 def list_metricas(request):
     metricas = Metrica.objects.all()
 
-    content = {
+    context = {
         'metricas': metricas
     }
 
-    return render(request, 'metricas/list.html', content)
+    return render(request, 'metricas/list.html', context=context)
 
 def create_metrica(request):
     if request.method == 'POST':

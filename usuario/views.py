@@ -6,11 +6,11 @@ from .forms import UsuarioModelForm
 def list_usuarios(request):
     usuarios = Usuario.objects.all()
 
-    content = {
+    context = {
         'usuarios': usuarios
     }
 
-    return render(request, 'usuarios/list.html', content)
+    return render(request, 'usuarios/list.html', context=context)
 
 def create_usuario(request):
     if request.method == 'POST':

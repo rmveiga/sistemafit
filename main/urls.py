@@ -16,15 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from acompanhamento.views import (
-    listagem_acompanhamentos
-)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', listagem_acompanhamentos),
+    path('acompanhamentos/', include(('acompanhamento.urls', 'acompanhamento'), namespace='acompanhamento')),
     path('usuarios/', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
-    path('acompanhamentos/', listagem_acompanhamentos),
 ]

@@ -24,11 +24,11 @@ def verifica_se_digito_negativo(request):
 def list_unidades(request):
     unidades = Unidade.objects.all()
 
-    content = {
+    context = {
         'unidades': unidades
     }
 
-    return render(request, 'unidades/list.html', content)
+    return render(request, 'unidades/list.html', context=context)
 
 def create_unidade(request):
     if request.method == 'POST':

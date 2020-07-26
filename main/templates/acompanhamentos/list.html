@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block acompanhamentos %}
+
+<h2>Acompanhamentos</h2>
+<a href="create"><button type="button">Novo acompanhamento</button></a>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<ul style="font-size: 18px">
+{% for acompanhamento in acompanhamentos %}
+    <li>
+        <div>
+            {{ acompanhamento.metrica }} -
+            {{ acompanhamento.medida }} -
+            {{ acompanhamento.dt_medicao }} -
+            {{ acompanhamento.usuario }}
+<!--                ( <a href="update/{{ acompanhamento.id }}">Editar</a>-->
+<!--                / <a href="delete/{{ acompanhamento.id }}">Excluir</a> )-->
+        </div>
+    </li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

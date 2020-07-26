@@ -37,3 +37,31 @@ def create_acompanhamento(request):
     }
 
     return render(request, 'acompanhamentos/create.html', context=context)
+
+def update_acompanhamento(request, acompanhamento_id):
+    acompanhamento = Acompanhamento.objects.get(pk=acompanhamento_id)
+
+    if request.method == 'POST':
+        valido = True
+
+        if valido:
+            form = AcompanhamentoModelForm(data=request.POST, instance=acompanhamento)
+
+            if form.is_valid():
+                form.save()
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    f'Acompanhamento alterado com sucesso'
+                )
+
+                return redirect('acompanhamento:list-acompanhamentos')
+        else:
+            form = AcompanhamentoModelForm(data=request.POST)
+    else:
+        form = AcompanhamentoModelForm(instance=acompanhamento)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'acompanhamentos/update.html', context=context)

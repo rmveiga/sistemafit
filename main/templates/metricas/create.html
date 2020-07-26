@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
-{% block usuarios %}
+{% block metricas %}
     <div class="row">
         <div class="col-md-9">
-            <h2>Editar usuário</h2>
+            <h2>Criar métrica</h2>
         </div>
     </div>
     <form method="post">
         {% csrf_token %}
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         {% for field in form %}
             <div class="form-group row">
@@ -27,7 +35,7 @@
         <div class="row justify-content-end">
             <div class="col-md-2">
                 <button class="btn btn-primary btn-block" type="submit">Salvar</button>
-                <a href="/usuarios/list"><button class="btn btn-primary btn-block" type="button">Cancelar</button></a>
+                <a href="/metricas/list"><button class="btn btn-primary btn-block" type="button">Cancelar</button></a>
             </div>
         </div>
     </form>

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block unidades %}
+{% block metricas %}
 
-<h2>Unidades</h2>
-<a href="create"><button type="button">Nova unidade</button></a>
+<h2>Métricas</h2>
+<a href="create"><button type="button">Nova métrica</button></a>
 
 {% if messages %}
 <div class="messages">
@@ -14,12 +14,12 @@
 {% endif %}
 
 <ul style="font-size: 18px">
-{% for unidade in unidades %}
+{% for metrica in metricas %}
     <li>
         <div>
-            {{ unidade.sigla }} ({{ unidade.digitos }} dígitos)
-                ( <a href="update/{{ unidade.id }}">Editar</a>
-                / <a href="delete/{{ unidade.id }}">Excluir</a> )
+            {{ metrica.nome }} ({{ metrica.unidade }})
+<!--                ( <a href="update/{{ metrica.id }}">Editar</a>-->
+<!--                / <a href="delete/{{ metrica.id }}">Excluir</a> )-->
         </div>
     </li>
 {% endfor %}

@@ -19,15 +19,12 @@ from django.urls import path, include
 from acompanhamento.views import (
     listagem_acompanhamentos
 )
-from metrica.views import (
-    listagem_metricas
-)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', listagem_acompanhamentos),
     path('usuarios/', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
-    path('', listagem_acompanhamentos),
+    path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
     path('acompanhamentos/', listagem_acompanhamentos),
-    path('metricas/', listagem_metricas),
 ]

@@ -4,6 +4,17 @@ from django.contrib import messages
 from .models import Metrica
 from .forms import MetricaModelForm
 
+def verifica_se_metrica_ja_existe(request, metrica=None):
+    nome = request.POST.get('nome')
+    metricas = Metrica.objects.filter(nome__iexact=nome)
+
+    if metrica is None:
+        if metricas:
+            return False
+    elif nome != metrica.nome and metricas:
+            return False
+    return True
+
 def list_metricas(request):
     metricas = Metrica.objects.all()
 
@@ -16,6 +27,12 @@ def list_metricas(request):
 def create_metrica(request):
     if request.method == 'POST':
         valido = True
+        if not verifica_se_metrica_ja_existe(request):
+            valido = False
+            messages.add_message(
+                request, messages.WARNING,
+                f'A métrica {request.POST.get("nome")} já está cadastrada'
+            )
 
         if valido:
             form = MetricaModelForm(request.POST)
@@ -43,6 +60,12 @@ def update_metrica(request, metrica_id):
 
     if request.method == 'POST':
         valido = True
+        if not verifica_se_metrica_ja_existe(request, metrica):
+            valido = False
+            messages.add_message(
+                request, messages.WARNING,
+                f'A métrica {request.POST.get("nome")} já está cadastrada'
+            )
 
         if valido:
             form = MetricaModelForm(data=request.POST, instance=metrica)

@@ -65,3 +65,13 @@ def update_acompanhamento(request, acompanhamento_id):
     }
 
     return render(request, 'acompanhamentos/update.html', context=context)
+
+def delete_acompanhamento(request, acompanhamento_id):
+    acompanhamento = Acompanhamento.objects.get(pk=acompanhamento_id)
+    acompanhamento.delete()
+    messages.add_message(
+        request, messages.SUCCESS,
+        f'Acompanhamento excluído com sucesso'
+    )
+
+    return redirect('acompanhamento:list-acompanhamentos')

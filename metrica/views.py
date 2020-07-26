@@ -65,3 +65,13 @@ def update_metrica(request, metrica_id):
     }
 
     return render(request, 'metricas/update.html', context=context)
+
+def delete_metrica(request, metrica_id):
+    metrica = Metrica.objects.get(pk=metrica_id)
+    metrica.delete()
+    messages.add_message(
+        request, messages.SUCCESS,
+        f'Métrica excluída com sucesso'
+    )
+
+    return redirect('metrica:list-metricas')

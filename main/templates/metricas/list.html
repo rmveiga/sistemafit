@@ -13,8 +13,8 @@
 </div>
 {% endif %}
 
-<ul style="font-size: 18px">
 {% for metrica in metricas %}
+<ul style="font-size: 18px">
     <li>
         <div>
             {{ metrica.nome }} ({{ metrica.unidade }})
@@ -22,8 +22,7 @@
                 / <a href="delete/{{ metrica.id }}">Excluir</a> )
         </div>
     </li>
-{% endfor %}
 </ul>
-
+{% endfor %}
 
 {% endblock %}

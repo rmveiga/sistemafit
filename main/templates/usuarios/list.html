@@ -13,8 +13,8 @@
 </div>
 {% endif %}
 
-<ul style="font-size: 18px">
 {% for usuario in usuarios %}
+<ul style="font-size: 18px">
     <li>
         <div>
             {{ usuario.nome }}
@@ -22,8 +22,7 @@
                 / <a href="delete/{{ usuario.id }}">Excluir</a> )
         </div>
     </li>
-{% endfor %}
 </ul>
-
+{% endfor %}
 
 {% endblock %}

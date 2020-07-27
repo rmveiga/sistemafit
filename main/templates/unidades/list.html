@@ -13,8 +13,8 @@
 </div>
 {% endif %}
 
-<ul style="font-size: 18px">
 {% for unidade in unidades %}
+<ul style="font-size: 18px">
     <li>
         <div>
             {{ unidade.sigla }} ({{ unidade.digitos }} dígitos)
@@ -22,8 +22,7 @@
                 / <a href="delete/{{ unidade.id }}">Excluir</a> )
         </div>
     </li>
-{% endfor %}
 </ul>
-
+{% endfor %}
 
 {% endblock %}

@@ -13,8 +13,8 @@
 </div>
 {% endif %}
 
-<ul style="font-size: 18px">
 {% for acompanhamento in acompanhamentos %}
+<ul style="font-size: 18px">
     <li>
         <div>
             {{ acompanhamento.metrica }} -
@@ -25,8 +25,7 @@
                 / <a href="delete/{{ acompanhamento.id }}">Excluir</a> )
         </div>
     </li>
-{% endfor %}
 </ul>
-
+{% endfor %}
 
 {% endblock %}

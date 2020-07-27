@@ -23,6 +23,11 @@ def verifica_se_digito_negativo(request):
 
 def list_unidades(request):
     unidades = Unidade.objects.all()
+    if not unidades:
+        messages.add_message(
+            request, messages.INFO,
+            f'Cadastre a primeira unidade'
+        )
 
     context = {
         'unidades': unidades

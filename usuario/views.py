@@ -17,6 +17,11 @@ def verifica_se_usuario_ja_existe(request, usuario=None):
 
 def list_usuarios(request):
     usuarios = Usuario.objects.all()
+    if not usuarios:
+        messages.add_message(
+            request, messages.INFO,
+            f'Cadastre o primeiro usuário'
+        )
 
     context = {
         'usuarios': usuarios

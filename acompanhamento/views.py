@@ -21,6 +21,11 @@ def verifica_se_medida_negativo(request):
 
 def list_acompanhamentos(request):
     acompanhamentos = Acompanhamento.objects.all()
+    if not acompanhamentos:
+        messages.add_message(
+            request, messages.INFO,
+            f'Cadastre o primeiro acompanhamento'
+        )
 
     context = {
         'acompanhamentos': acompanhamentos

@@ -17,6 +17,11 @@ def verifica_se_metrica_ja_existe(request, metrica=None):
 
 def list_metricas(request):
     metricas = Metrica.objects.all()
+    if not metricas:
+        messages.add_message(
+            request, messages.INFO,
+            f'Cadastre a primeira metrica'
+        )
 
     context = {
         'metricas': metricas

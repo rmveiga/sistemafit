@@ -24,9 +24,10 @@ class UsuarioTestCase(TestCase):
             self.assertEqual(str(msg), 'O usuário Rafael já está cadastrado')
 
     def test_editar_usuario_ja_existente(self):
+        self.usuario = Usuario.objects.create(nome='Iza')
         client = Client()
         response = client.post(
-            '/usuarios/update/1',
+            '/usuarios/update/2',
             {
                 'nome': 'Rafael'
             }

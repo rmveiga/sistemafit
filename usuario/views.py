@@ -64,7 +64,7 @@ def update_usuario(request, usuario_id):
 
     if request.method == 'POST':
         valido = True
-        if not verifica_se_usuario_ja_existe(request):
+        if not verifica_se_usuario_ja_existe(request, usuario):
             valido = False
             messages.add_message(
                 request, messages.WARNING,

@@ -3,6 +3,9 @@ from django.contrib import messages
 
 from .models import Usuario
 from .forms import UsuarioModelForm
+from acompanhamento.models import Acompanhamento
+from metrica.models import Metrica
+
 
 def verifica_se_usuario_ja_existe(request, usuario=None):
     nome = request.POST.get('nome')
@@ -12,8 +15,26 @@ def verifica_se_usuario_ja_existe(request, usuario=None):
         if usuarios:
             return False
     elif nome != usuario.nome and usuarios:
-            return False
+        return False
     return True
+
+
+def calcula_imc(usuario):
+    peso = Metrica.objects.filter(nome='Peso')
+    if peso is None or not usuario.altura:
+        return 0
+
+    acompanhamento = Acompanhamento.objects.filter(
+        metrica__nome='Peso', usuario__nome=usuario.nome
+    ).order_by('-dt_medicao').first()
+    if acompanhamento is None:
+        return 0
+    else:
+        medida = acompanhamento.medida
+        imc = medida / (usuario.altura ** 2)
+
+        return round(imc, ndigits=2)
+
 
 def list_usuarios(request):
     usuarios = Usuario.objects.all()
@@ -28,6 +49,7 @@ def list_usuarios(request):
     }
 
     return render(request, 'usuarios/list.html', context=context)
+
 
 def create_usuario(request):
     if request.method == 'POST':
@@ -59,6 +81,7 @@ def create_usuario(request):
 
     return render(request, 'usuarios/create.html', context=context)
 
+
 def update_usuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
 
@@ -86,10 +109,12 @@ def update_usuario(request, usuario_id):
         form = UsuarioModelForm(instance=usuario)
 
     context = {
-        'form': form
+        'form': form,
+        'imc': calcula_imc(usuario)
     }
 
     return render(request, 'usuarios/update.html', context=context)
+
 
 def delete_usuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)

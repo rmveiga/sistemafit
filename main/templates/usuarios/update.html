@@ -32,6 +32,12 @@
                 {% endfor %}
             {% endif %}
         {% endfor %}
+        <div class="form-group row">
+                <label for="id_imc" class="col-sm-2 col-form-label">IMC</label>
+                <div class="col-sm-10 ">
+                    <input type="number" name="imc" value={{ imc }} step="any" disabled id="id_imc">
+                </div>
+            </div>
         <div class="row justify-content-end">
             <div class="col-md-2">
                 <button class="btn btn-primary btn-block" type="submit">Salvar</button>

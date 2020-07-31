@@ -19,6 +19,13 @@ def verifica_se_usuario_ja_existe(request, usuario=None):
     return True
 
 
+def verifica_se_altura_negativa(request):
+    altura = float(request.POST.get('altura'))
+    if altura < 0:
+        return False
+    return True
+
+
 def calcula_imc(usuario):
     peso = Metrica.objects.filter(nome='Peso')
     if peso is None or not usuario.altura:
@@ -60,6 +67,12 @@ def create_usuario(request):
                 request, messages.WARNING,
                 f'O usuário {request.POST.get("nome")} já está cadastrado'
             )
+        if not verifica_se_altura_negativa(request):
+            valido = False
+            messages.add_message(
+                request, messages.WARNING,
+                f'O valor da altura não pode ser negativo'
+            )
 
         if valido:
             form = UsuarioModelForm(request.POST)
@@ -92,6 +105,12 @@ def update_usuario(request, usuario_id):
             messages.add_message(
                 request, messages.WARNING,
                 f'O usuário {request.POST.get("nome")} já está cadastrado'
+            )
+        if not verifica_se_altura_negativa(request):
+            valido = False
+            messages.add_message(
+                request, messages.WARNING,
+                f'O valor da altura não pode ser negativo'
             )
 
         if valido:

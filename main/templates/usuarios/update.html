@@ -33,16 +33,43 @@
             {% endif %}
         {% endfor %}
         <div class="form-group row">
-                <label for="id_imc" class="col-sm-2 col-form-label">IMC</label>
-                <div class="col-sm-10 ">
-                    <input type="number" name="imc" value={{ imc }} step="any" disabled id="id_imc">
-                </div>
-            </div>
+            <h3><b>IMC: {{ imc }}</b></h3>
+        </div>
         <div class="row justify-content-end">
             <div class="col-md-2">
                 <button class="btn btn-primary btn-block" type="submit">Salvar</button>
                 <a href="/usuarios/list"><button class="btn btn-primary btn-block" type="button">Cancelar</button></a>
             </div>
         </div>
+        {% if imc == 0 %}
+        <div>
+            <ul>
+                <p>
+                    Para que o sistema seja capaz de calcular o IMC, é necessário que as seguintes instruções
+                    sejam seguidas:
+                </p>
+                <li>A altura do usuário precisa ser informada;</li>
+                <li>A métrica "Peso" precisa estar cadastrada;</li>
+                <li>É preciso haver pelo menos um acompanhamento para este usuário com a métrica "Peso".</li>
+                <p><b>
+                    OBS.: Será considerado para o cálculo do IMC, o acompanhamento mais recente contendo
+                    a métrica "Peso".
+                </b></p>
+            </ul>
+        </div>
+        {% else %}
+        <div>
+            <ul>
+                <p>
+                    Entenda o resultado do IMC:
+                </p>
+                <li>MENOR DO QUE 18,5: <b>MAGREZA</b> (OBESIDADE GRAU ZERO)</li>
+                <li>ENTRE 18,5 E 24,9: <b>NORMAL</b> (OBESIDADE GRAU ZERO)</li>
+                <li>ENTRE 25,0 E 29,9: <b>SOBREPESO</b> (OBESIDADE GRAU 1)</li>
+                <li>ENTRE 30,0 E 39,9: <b>OBESO</b> (OBESIDADE GRAU 2)</li>
+                <li>MAIOR DO QUE 40,0: <b>OBESO GRAVE</b> (OBESIDADE GRAU 3)</li>
+            </ul>
+        </div>
+        {% endif %}
     </form>
 {% endblock %}

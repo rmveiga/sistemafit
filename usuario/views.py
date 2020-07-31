@@ -20,8 +20,11 @@ def verifica_se_usuario_ja_existe(request, usuario=None):
 
 
 def verifica_se_altura_negativa(request):
-    altura = float(request.POST.get('altura'))
-    if altura < 0:
+    altura = request.POST.get('altura')
+    if altura == '' or altura is None:
+        return True
+
+    if float(altura) < 0:
         return False
     return True
 

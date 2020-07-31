@@ -20,7 +20,7 @@ def verifica_se_medida_negativo(request):
     return True
 
 def list_acompanhamentos(request):
-    acompanhamentos = Acompanhamento.objects.all()
+    acompanhamentos = Acompanhamento.objects.all().order_by('dt_medicao')
     if not acompanhamentos:
         messages.add_message(
             request, messages.INFO,

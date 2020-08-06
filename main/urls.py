@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views
+from unidade.urls import unidade_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('usuarios/', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
+    # API Endpoints
+    path('api/', include(unidade_router.urls ))
 ]

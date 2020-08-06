@@ -18,6 +18,7 @@ from django.urls import path, include
 
 from . import views
 from unidade.urls import unidade_router
+from metrica.urls import metrica_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
     # API Endpoints
-    path('api/', include(unidade_router.urls ))
+    path('api/', include(metrica_router.urls )),
+    path('api/', include(metrica_router.urls ))
 ]

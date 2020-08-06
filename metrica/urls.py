@@ -1,6 +1,11 @@
 from django.urls import path
+from rest_framework import routers
 
 from metrica import views
+from .api.viewsets import MetricaViewset
+
+metrica_router = routers.DefaultRouter()
+metrica_router.register('metricas', MetricaViewset, basename='api-metricas')
 
 urlpatterns = [
     path('list', views.list_metricas, name='list-metricas'),

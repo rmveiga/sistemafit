@@ -1,6 +1,11 @@
 from django.urls import path
+from rest_framework import routers
 
 from usuario import views
+from .api.viewsets import UsuarioViewset
+
+usuario_router = routers.DefaultRouter()
+usuario_router.register('usuarios', UsuarioViewset, basename='api-usuarios')
 
 urlpatterns = [
     path('list', views.list_usuarios, name='list-usuarios'),

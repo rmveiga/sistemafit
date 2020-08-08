@@ -19,15 +19,18 @@ from django.urls import path, include
 from . import views
 from unidade.urls import unidade_router
 from metrica.urls import metrica_router
+from usuario.urls import usuario_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # System Paths
     path('', views.home),
     path('acompanhamentos/', include(('acompanhamento.urls', 'acompanhamento'), namespace='acompanhamento')),
     path('usuarios/', include(('usuario.urls', 'usuario'), namespace='usuario')),
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
-    # API Endpoints
+    # API Routes
     path('api/', include(unidade_router.urls )),
-    path('api/', include(metrica_router.urls ))
+    path('api/', include(metrica_router.urls )),
+    path('api/', include(usuario_router.urls )),
 ]

@@ -28,6 +28,6 @@ urlpatterns = [
     path('unidades/', include(('unidade.urls', 'unidade'), namespace='unidade')),
     path('metricas/', include(('metrica.urls', 'metrica'), namespace='metrica')),
     # API Endpoints
-    path('api/', include(metrica_router.urls )),
+    path('api/', include(unidade_router.urls )),
     path('api/', include(metrica_router.urls ))
 ]

@@ -20,6 +20,7 @@ from . import views
 from unidade.urls import unidade_router
 from metrica.urls import metrica_router
 from usuario.urls import usuario_router
+from acompanhamento.urls import acompanhamento_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,4 +34,5 @@ urlpatterns = [
     path('api/', include(unidade_router.urls )),
     path('api/', include(metrica_router.urls )),
     path('api/', include(usuario_router.urls )),
+    path('api/', include(acompanhamento_router.urls )),
 ]

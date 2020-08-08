@@ -1,6 +1,11 @@
 from django.urls import path
+from rest_framework import routers
 
 from acompanhamento import views
+from .api.viewsets import AcompanhamentoViewset
+
+acompanhamento_router = routers.DefaultRouter()
+acompanhamento_router.register('acompanhamentos', AcompanhamentoViewset, basename='api-acompanhamentos')
 
 urlpatterns = [
     path('list', views.list_acompanhamentos, name='list-acompanhamentos'),
